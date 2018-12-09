@@ -6,7 +6,7 @@ class App extends Component {
     return (
       <div className="main-container">
         <ReactiveBase
-          app="steam-search"
+          app="steam-ingest2"
           url="http://localhost:9200"
           theme={
             {
@@ -14,7 +14,6 @@ class App extends Component {
                 fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans", "Ubuntu", "Droid Sans", "Helvetica Neue", sans-serif',
                 fontSize: '16px',
               },
-
               colors: {
                 textColor: '#fff',
                 backgroundColor: '#212121',
@@ -25,30 +24,29 @@ class App extends Component {
                 borderColor: '#666',
               }
             }
-        }
-      >
-          <CategorySearch
-          componentId="searchbox"
-          dataField="QueryName"
-          categoryField="ResponseName"
-          placeholder="ストアを検索する"
-        />
-        <ResultCard
-          componentId="results"
-          dataField="name"
-          size={10}
-          pagination={true}
-          react={{
-            and: ["searchbox", "ratingsfilter"]
-          }}
-          onData={(res) => {
-            return {
-              image: res.HeaderImage,
-              title: res.QueryName,
-              description: `Release Date: ${res.ReleaseDate}<br/>Price: $${res.PriceInitial}`
-            }
-          }}
-        />
+          }
+        >
+          <DataSearch
+            componentId="searchbox"
+            dataField={["ResponseName"]}
+          />
+          <ResultCard
+            componentId="results"
+            dataField="name"
+            size={10}
+            pagination={true}
+            react={{
+              and: ["searchbox", "ratingsfilter"]
+            }}
+            onData={(res) => {
+              return {
+                image: res.HeaderImage,
+                title: res.ResponseName,
+                description: `<p>Release Date: ${res.ReleaseDate}</p><p>Price: $${res.PriceInitial}</p>`,
+                url: `https://store.steampowered.com/app/${res.ResponseID}`
+              }
+            }}
+          />
         </ReactiveBase>
       </div >
     );
