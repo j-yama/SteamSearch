@@ -1,7 +1,3 @@
-.main-container{
-  background-color: #1b2838;
-}
-
 .App {
   text-align: center;
 }
@@ -33,4 +29,58 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* for Steam Search */
+body{
+  background-color: #1B3C53;
+  background-image: linear-gradient(315deg, #000000 0%, #1B3C53 74%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-container{
+  width: 616px;
+  margin-top: 20px;
+}
+
+.result-list .resultStats{
+  color: #3b6e8c;
+}
+
+.result-list .listItem{
+  background-color: #16202D;
+  padding: 0;
+  margin: 2px 0;
+  border: 0;
+  background: rgba( 0, 0, 0, 0.4 );
+}
+
+.result-list .image{
+  width: 120px;
+  height: 45px;
+}
+
+.result-list article, .result-list article div{
+  display: flex;
+  align-items: center;  /* 子要素をflexboxにより中央に配置する */
+}
+
+.result-list article h2{
+  padding: 0;
+}
+
+.releaseDate{
+  color: #4c6c8c;
+  width: 200px;
+}
+
+.price{
+}
+
+input{
+  background-color: #1C3345 !important;
+  border: 1px solid #000 !important;
 }

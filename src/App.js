@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ReactiveBase, DataSearch, MultiList, SingleRange, RangeSlider, ResultCard, CategorySearch } from '@appbaseio/reactivesearch';
+import { ReactiveBase, DataSearch, MultiList, SingleRange, RangeSlider, ResultCard, CategorySearch, ResultList } from '@appbaseio/reactivesearch';
 import './App.css';
 class App extends Component {
   render() {
@@ -11,17 +11,12 @@ class App extends Component {
           theme={
             {
               typography: {
-                fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans", "Ubuntu", "Droid Sans", "Helvetica Neue", sans-serif',
+                fontFamily: 'Arial, Helvetica, sans-serif',
                 fontSize: '16px',
               },
               colors: {
-                textColor: '#fff',
-                backgroundColor: '#212121',
-                primaryTextColor: '#fff',
-                primaryColor: '#2196F3',
-                titleColor: '#fff',
-                alertColor: '#d9534f',
-                borderColor: '#666',
+                titleColor: '##c7d5e0',
+                textColor: '#c7d5e0',
               }
             }
           }
@@ -30,21 +25,37 @@ class App extends Component {
             componentId="searchbox"
             dataField={["ResponseName"]}
           />
-          <ResultCard
-            componentId="results"
-            dataField="name"
-            size={10}
+          <ResultList
+            componentId="resultLists"
+            size={25}
             pagination={true}
             react={{
-              and: ["searchbox", "ratingsfilter"]
+              "and": ["searchbox"]
             }}
             onData={(res) => {
               return {
                 image: res.HeaderImage,
                 title: res.ResponseName,
-                description: `<p>Release Date: ${res.ReleaseDate}</p><p>Price: $${res.PriceInitial}</p>`,
-                url: `https://store.steampowered.com/app/${res.ResponseID}`
+                description: `
+                <p class="releaseDate">${res.ReleaseDate}</p>
+                <p class="price">$${res.PriceInitial}</p>
+                `,
+                url: `https://store.steampowered.com/app/${res.ResponseID}`,
               }
+            }}
+            className="result-list"
+            innerClass={{
+              resultsInfo: "resultsInfo",
+              sortOptions: "sortOptions",
+              resultStats: "resultStats",
+              noResults: "noResults",
+              button: "button",
+              pagination: "pagination",
+              list: "list",
+              listItem: "listItem",
+              image: "image",
+              title: "title",
+              poweredBy: "poweredBy",
             }}
           />
         </ReactiveBase>
