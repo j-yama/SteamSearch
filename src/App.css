@@ -46,6 +46,20 @@ body{
   margin-top: 20px;
 }
 
+.data-search .input{
+  color: white;
+}
+
+.data-search .list li{
+  background-color: #aaa !important;
+  color: #000;
+  overflow: hidden;
+}
+
+.data-search .list li:target{
+  background-color: #666 !important;
+}
+
 .result-list .resultStats{
   color: #3b6e8c;
 }
@@ -58,6 +72,10 @@ body{
   background: rgba( 0, 0, 0, 0.4 );
 }
 
+.result-list .listItem:hover{
+  background: rgba( 0, 0, 0, 0.8 );  
+}
+
 .result-list .image{
   width: 120px;
   height: 45px;
@@ -65,7 +83,7 @@ body{
 
 .result-list article, .result-list article div{
   display: flex;
-  align-items: center;  /* 子要素をflexboxにより中央に配置する */
+  align-items: center;
 }
 
 .result-list article h2{
@@ -74,10 +92,11 @@ body{
 
 .releaseDate{
   color: #4c6c8c;
-  width: 200px;
+  width: 150px;
 }
 
 .price{
+  width: 50px;
 }
 
 input{

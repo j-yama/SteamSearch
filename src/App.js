@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ReactiveBase, DataSearch, MultiList, SingleRange, RangeSlider, ResultCard, CategorySearch, ResultList } from '@appbaseio/reactivesearch';
+import { ReactiveBase, DataSearch, ResultList, SelectedFilters } from '@appbaseio/reactivesearch';
 import './App.css';
 class App extends Component {
   render() {
@@ -15,22 +15,37 @@ class App extends Component {
                 fontSize: '16px',
               },
               colors: {
-                titleColor: '##c7d5e0',
+                titleColor: '#c7d5e0',
                 textColor: '#c7d5e0',
+                backgroundColor: '#212121',
+                // primaryTextColor: '#fff',
+                primaryColor: '#2B475E',
+                // alertColor: '#d9534f',
+                // borderColor: '#666',
               }
             }
           }
         >
           <DataSearch
-            componentId="searchbox"
+            componentId="title"
             dataField={["ResponseName"]}
+            placeholder="enter search term"
+            showIcon={false}
+            title="Steam Search"
+            className="data-search"
+            innerClass={{
+              title: 'title',
+              input: 'input',
+              list: 'list',
+            }}
           />
+          <SelectedFilters />
           <ResultList
             componentId="resultLists"
             size={25}
             pagination={true}
             react={{
-              "and": ["searchbox"]
+              "and": ["title"]
             }}
             onData={(res) => {
               return {
@@ -43,6 +58,13 @@ class App extends Component {
                 url: `https://store.steampowered.com/app/${res.ResponseID}`,
               }
             }}
+            sortOptions={[
+              { label: "Best Match", dataField: "_score", sortBy: "desc" },
+              { label: "Name", dataField: "ResponseName", sortBy: "asc" },
+              { label: "Release Date", dataField: "ReleaseDate", sortBy: "desc" },
+              { label: "Lowest Price", dataField: "PriceInitial", sortBy: "asc" },
+              { label: "Highest Price", dataField: "PriceInitial", sortBy: "desc" },
+            ]}
             className="result-list"
             innerClass={{
               resultsInfo: "resultsInfo",
